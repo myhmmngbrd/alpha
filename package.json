@@ -1,0 +1,24 @@
+{
+  "name": "alpha",
+  "version": "1.0.0",
+  "description": "\"# alpha\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "starts": "supervisor app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/myhmmngbrd/alpha.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/myhmmngbrd/alpha/issues"
+  },
+  "homepage": "https://github.com/myhmmngbrd/alpha#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "morgan": "^1.10.0"
+  }
+}
