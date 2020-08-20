@@ -51,13 +51,21 @@ class Block {
     }
 }
 
-a = new Block('div', document.body);
+class Radio {
+    constructor(length, parentnode) {
+        const ul = new Block('ul', parentnode)
+        let li;
+        for (let i = 0; i < length; i++) {
+            li = new Block('li', ul);
+            li.on('click',() => {
+                for (let j = 0; j < length; j++) {
+                    ul.childlist[j].node.classList.remove('selected');
+                }
+                console.log(this.node);
+            });
+        }
+    }
+}
 
-let b = function() { console.log('click!'); };
-let c = function() { console.log('click!2'); };
-
-a.on('click', b);
-a.on('click', c);
-a.on('click',() => { console.log('click!3'); });
-a.off('click',c );
-
+document.body.innerHTML = '';
+radio = new Radio(5, document.body);
