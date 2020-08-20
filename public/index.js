@@ -27,6 +27,7 @@ class Block {
         if (!this.eventlist[eventtype]) {
             this.eventlist[eventtype] = [];
         }
+        callback = callback.bind(this);
         this.eventlist[eventtype].push(callback);
         this.node.addEventListener(eventtype, callback);
     }
@@ -57,11 +58,11 @@ class Radio {
         let li;
         for (let i = 0; i < length; i++) {
             li = new Block('li', ul);
-            li.on('click',() => {
+            li.on('click',function () {
                 for (let j = 0; j < length; j++) {
                     ul.childlist[j].node.classList.remove('selected');
                 }
-                console.log(this.node);
+                this.node.classList.add('selected');
             });
         }
     }
