@@ -52,21 +52,45 @@ class Block {
     }
 }
 
-class Radio {
-    constructor(length, parentnode) {
-        const ul = new Block('ul', parentnode)
-        let li;
-        for (let i = 0; i < length; i++) {
-            li = new Block('li', ul);
-            li.on('click',function () {
-                for (let j = 0; j < length; j++) {
-                    ul.childlist[j].node.classList.remove('selected');
-                }
-                this.node.classList.add('selected');
-            });
-        }
+
+class List {
+    constructor(parentnode) {
+        this.root = new Block('ul', parentnode,);
+        this.index = [];
+    }
+    add(contents) {
+        let li = new Block('li', this.root);
+        this.index.push(li);
+        if (contents) {
+            li.node.innerHTML = contents;
+        } 
     }
 }
 
+class Link extends List{
+    constructor(parentnode) {
+        super (parentnode, 0);
+    }
+    add(text, href) {
+        if (!text) return;
+        const li = new Block('li', this.root);
+        const a = new Block('a', li, { href: href ? href : '/' });
+        a.node.innerHTML = text;
+        this.index.push(a);
+    }
+}
+
+
 document.body.innerHTML = '';
-radio = new Radio(5, document.body);
+root = new Block('div', document.body, { id: 'root', });
+
+header = new Block('header', root, { id: 'header', });
+body = new Block('div', root, { id: 'body', });
+footer = new Block('footer', root, { id: 'footer', });
+
+navi = new Link(header);
+for (let i=0; i<5; i++) {
+    navi.add(i+'번');
+}
+
+sidebar = new Block('div',body, { id: 'sidebar'});
