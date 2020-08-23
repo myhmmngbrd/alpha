@@ -1,8 +1,9 @@
 const express = require('express');
 const path = require('path');
-var logger = require('morgan');
+const logger = require('morgan');
 
-var indexRouter = require('./route/index');
+const indexRouter = require('./route/index');
+const forumRouter = require('./route/forum');
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/forum', forumRouter);
 
 app.use(function(err, req, res, next) {
     next(err);
