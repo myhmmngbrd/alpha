@@ -24,6 +24,7 @@ class DOMStructor {
 class DOMController {
     static currentDOM = {};
     static render(node, root) {
+        // root의 존재 여부로 생성과 갱신 구분
         const element = document.createElement(node.type);   
         for (let key in node.attributes) {
             element.setAttribute(key, node.attributes[key]);
