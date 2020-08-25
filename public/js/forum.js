@@ -1,21 +1,47 @@
-document.body.innerHTML = '';
-const root = new Block('div', document.body, { id: 'root', });
 
-const header = new Block('header', root, { id: 'header', });
-const headerlogo = new Block('div', header, { id:'logo', });
-headerlogo.node.innerHTML = 'LOGO';
-headerlogo.on('click', () => { window.location.href = '/'; })
-const headernavi = new Link(header);
-headernavi.root.node.classList.add('navigator');
-headernavi.add('게시판', '/forum')
 
-const body = new Block('div', root, { id: 'body', });
-const sidebar = new Block('div', body, { id: 'sidebar'});
-const sidenavi = new Link(sidebar);
-sidenavi.root.node.classList.add('navigator');
-const main = new Block('div', body, { id: 'contents' });
+class DOMNode {
+    constructor(type, attributes, ...contents) {
+        this.type = type;
+        this.attributes = attributes;
+        this.contents = contents;
+    }
+}
 
-const footer = new Block('footer', root, { id: 'footer', });
+class DOMStructure {
+    constructor(type, properties, ...children) {
+        this.type = type;
+        this.properties = properties;
+        this.children = children;
+        if (properties.key) this.key = properties.key;
+        else this.key = key_value++
+    }
+    static key_value = 0;
+    /**
+     * @param {dom eleemnt(string), DOMStructure(class object)} type 
+     * @param {Object} properties 
+     * @param  {...any} children 
+     */
+    static create(type, properties, ...children) {
+        if (typeof type === 'string') { // DOM element
+            return new DOMNode(type, properties, ...children);
+        } else if (type instanceof Object) { // DOMStructure
+            return new type(type, properties, ...children).render();
+        }
+    }
+    /**
+     * @param {DOMStructure(class instance)} type 
+     * @param {Object} properties 
+     * @param  {...any} children 
+     */
+    static check(type, properties, ...children) {
 
-const forum = new Block('div', main, { id: 'forum' });
-const forumlist = new List(forum);
+
+    }
+    render() { /* virtual function */}
+}
+
+class DOMController {
+    constructor() {}
+    static render()
+}

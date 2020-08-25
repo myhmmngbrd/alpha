@@ -4,15 +4,19 @@ const add = DOMStructor.createNode;
 class HNavi extends DOMStructor {
     render() {
         return add('ul', {class: 'navigator'},
-            add('li', null, add('a', {href: '/forom'}, '게시판')),
+            add('li', null, add('a', {href: '/forum'}, '게시판')),
         );
     }
+}
+
+onclickfn = function() {
+    console.log('success!');
 }
 
 class Header extends DOMStructor {
     render() {
         return add('header', {id: 'header'},
-            add('div', {id: 'logo',/*onclick function*/}, 'LOGO'),
+            add('div', {id: 'logo',/*onclick function*/ onclick: onclickfn()}, 'LOGO'),
             add(HNavi),
         );
     }
